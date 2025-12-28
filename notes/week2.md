@@ -33,13 +33,17 @@ Hãy lấy ví dụ về việc **Mua bán nhà đất**:
 
 ### Cấu trúc của một Smart Contract
 
+_(Tham khảo từ Solidity Docs)_
+
 Nếu bạn là dân lập trình (hoặc biết chút ít về Excel), hãy hình dung Smart Contract giống như một **Class** (Lớp đối tượng) hoặc một file Excel được khóa lại.
 
 Nó gồm 3 phần chính:
 
 1.  **Dữ liệu (State Variables):** Giống như các ô chứa dữ liệu trong Excel. Ví dụ: `Số dư = 100`. Đây là bộ nhớ lâu dài của hợp đồng.
 2.  **Hàm (Functions):** Giống như các công thức hoặc nút bấm. Ví dụ: `Hàm ChuyenTien()`. Khi bấm nút này, dữ liệu sẽ thay đổi.
-3.  **Sự kiện (Events):** Giống như tiếng chuông thông báo "Ting!" khi giao dịch hoàn tất để mọi người biết.
+    -   **View/Pure Functions:** Hàm chỉ đọc, không sửa dữ liệu (miễn phí Gas).
+    -   **Payable Functions:** Hàm đặc biệt có thể nhận tiền (ETH) gửi kèm.
+3.  **Sự kiện (Events):** Giống như tiếng chuông thông báo "Ting!" khi giao dịch hoàn tất để mọi người biết. Các ứng dụng bên ngoài (Frontend) sẽ lắng nghe tiếng chuông này để cập nhật giao diện.
 
 ### Điểm mạnh và điểm yếu
 
@@ -61,10 +65,17 @@ Nó gồm 3 phần chính:
 
 ### Remix là gì?
 
+_(Tham khảo từ Remix Docs)_
+
 Nếu bạn muốn viết văn bản, bạn dùng Microsoft Word (cần cài đặt) hoặc Google Docs (dùng ngay trên web).
 
 -   **Remix IDE** chính là **Google Docs dành cho lập trình viên Blockchain**.
 -   Bạn không cần cài đặt gì cả. Chỉ cần mở trình duyệt, vào trang web Remix là có thể viết code, biên dịch và chạy thử Smart Contract ngay lập tức.
+-   **Các module chính:**
+    -   **File Explorer:** Quản lý file code.
+    -   **Solidity Compiler:** Trình biên dịch (biến code thành ngôn ngữ máy).
+    -   **Deploy & Run Transactions:** Nơi triển khai và test thử contract.
+    -   **Plugin Manager:** Cài thêm đồ chơi (ví dụ: tool check lỗi bảo mật, tool verify contract).
 
 ### Các bước triển khai Contract (Quy trình làm bánh)
 

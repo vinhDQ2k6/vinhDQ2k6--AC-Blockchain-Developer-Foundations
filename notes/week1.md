@@ -14,6 +14,14 @@ Hãy tưởng tượng về một **cuốn sổ cái kế toán (ledger)** dùng
 -   **Cách mới (Blockchain):** Cuốn sổ cái này được photo ra hàng nghìn bản và phát cho **tất cả mọi người** trong mạng lưới cùng giữ. Mỗi khi có giao dịch mới, tất cả mọi người cùng cập nhật vào cuốn sổ của mình.
     => **Blockchain** chính là cuốn sổ cái kỹ thuật số được chia sẻ và đồng bộ hóa trên toàn cầu, không ai nắm quyền kiểm soát duy nhất.
 
+### Vấn đề cốt lõi: Chi tiêu hai lần (Double Spending)
+
+_(Tham khảo từ Bitcoin Whitepaper)_
+
+-   Trong thế giới kỹ thuật số, việc copy một file ảnh hay file nhạc rất dễ dàng.
+-   Tiền điện tử cũng là một dạng file số. Nếu tôi gửi cho bạn 1 đồng Bitcoin (file số), làm sao đảm bảo tôi không copy file đó để gửi tiếp cho người khác?
+-   **Giải pháp:** Blockchain giải quyết việc này bằng cách công khai lịch sử giao dịch cho tất cả mọi người. Nếu tôi đã tiêu đồng tiền đó rồi, cả mạng lưới sẽ biết và từ chối giao dịch thứ hai của tôi. Đây là đột phá lớn nhất của Satoshi Nakamoto.
+
 ### Tính chất nổi bật của blockchain
 
 1.  **Phi tập trung (Decentralized):** Không có "ông trùm" (như Google, Facebook hay Ngân hàng) nắm quyền sinh sát. Quyền lực thuộc về cộng đồng.
@@ -68,6 +76,13 @@ Blockchain không chỉ là tiền ảo. Nó là một công nghệ giúp con ng
 
 -   **Sự kiện:** Vitalik Buterin thấy Bitcoin quá giới hạn (chỉ biết tính tiền). Anh tạo ra Ethereum.
 -   **Đặc điểm:** Ethereum cho phép chạy các đoạn code trên blockchain, gọi là **Smart Contract**.
+-   **EVM (Ethereum Virtual Machine):** _(Tham khảo từ Ethereum Docs)_ Hãy coi Ethereum là một **"Máy tính thế giới" (World Computer)** khổng lồ. Thay vì mỗi người chạy code trên máy riêng, tất cả cùng thuê chung một cái máy tính siêu lớn này để chạy ứng dụng. EVM chính là bộ não xử lý mọi dòng code đó.
+-   **Turing Completeness (Tính đầy đủ Turing):** _(Tham khảo từ Ethereum Whitepaper)_
+    -   Bitcoin giống như một chiếc máy tính bỏ túi đơn giản, chỉ có thể thực hiện các phép tính cộng trừ cơ bản (không có vòng lặp phức tạp).
+    -   Ethereum giống như một chiếc máy tính thực thụ, có thể chạy bất kỳ chương trình nào, bất kỳ vòng lặp nào (miễn là bạn có đủ tiền trả phí Gas). Đây là sự khác biệt lớn nhất giúp Ethereum tạo ra cả một hệ sinh thái ứng dụng phong phú.
+-   **DAO (Tổ chức tự trị phi tập trung):** _(Tham khảo từ Ethereum Whitepaper)_
+    -   Hãy tưởng tượng một công ty không có giám đốc, không có nhân viên, chỉ có các dòng code điều hành.
+    -   Mọi quyết định (như chi tiêu tiền, thay đổi luật) đều được thực hiện tự động dựa trên sự bỏ phiếu của cộng đồng, không ai có thể gian lận hay biển thủ công quỹ.
 -   **Ví dụ:** Thay vì chỉ chuyển tiền, bạn có thể lập trình: "Nếu ngày mai trời mưa, tự động chuyển 10 đồng cho A".
 -   **So sánh:** Nếu Bitcoin là cái máy tính bỏ túi, thì Ethereum là cái **Smartphone** - cài được đủ loại ứng dụng (App).
 
@@ -141,9 +156,37 @@ Khi bạn bấm "Gửi tiền":
 
 ### Xác nhận và thêm vào chuỗi (Mining/Consensus)
 
--   Để cái thùng (Block) này được chấp nhận, Miner phải giải một bài toán khó (với Bitcoin - Proof of Work) hoặc đặt cọc tiền uy tín (với Ethereum - Proof of Stake).
--   Người chiến thắng sẽ được quyền gắn Block mới vào chuỗi (Chain) và nhận phần thưởng.
+_(Tham khảo từ Ethereum Docs - Consensus Mechanisms)_
+
+Để mạng lưới thống nhất với nhau, cần giải quyết 2 vấn đề chính:
+
+1.  **Sybil Resistance (Chống giả mạo danh tính):**
+
+    -   Nếu việc tạo danh tính (ID) là miễn phí, một kẻ xấu có thể tạo ra hàng triệu ID giả để thao túng mạng lưới (tấn công Sybil).
+    -   **Giải pháp:** Bắt buộc người tham gia phải bỏ ra một cái gì đó có giá trị.
+        -   **Proof of Work (PoW):** Bỏ ra **Sức mạnh tính toán (Điện năng)**. Giống như mua vé số, ai mua nhiều vé (máy mạnh) thì dễ trúng, nhưng tốn tiền.
+        -   **Proof of Stake (PoS):** Bỏ ra **Tiền đặt cọc (Stake)**. Ai đặt cọc nhiều tiền thì được tin tưởng. Nếu gian lận, tiền cọc bị tịch thu (Slashing).
+
+2.  **Chain Selection Rule (Quy tắc chọn chuỗi):**
+    -   Khi có 2 thợ đào cùng tìm ra block mới cùng lúc, chuỗi sẽ bị tách làm đôi (Fork). Mạng lưới phải chọn đi theo nhánh nào?
+    -   **Bitcoin (Nakamoto Consensus):** Chọn **Chuỗi dài nhất** (hoặc nặng nhất - tốn nhiều công sức đào nhất).
+    -   **Ethereum (Gasper):** Chọn chuỗi có nhiều sự ủng hộ (attestations) nhất từ các Validator.
+
 -   **Hash (Hàm băm):** Mỗi Block đều có một dấu vân tay số (Hash) duy nhất. Block sau sẽ chứa dấu vân tay của Block trước. Điều này tạo nên sự liên kết chặt chẽ (Chain).
+
+### Tính hoàn tất (Finality)
+
+_(Tham khảo từ Ethereum Docs)_
+
+-   **Probabilistic Finality (Bitcoin):** Bạn không bao giờ chắc chắn 100% giao dịch đã an toàn. Nhưng càng nhiều block được nối thêm vào sau block chứa giao dịch của bạn, xác suất bị đảo ngược càng thấp. (Thường chờ 6 block là an toàn).
+-   **Economic Finality (Ethereum PoS):** Sau một khoảng thời gian (khoảng 15 phút), block sẽ được đóng dấu "Finalized". Muốn đảo ngược block này, kẻ tấn công phải chấp nhận mất ít nhất 1/3 tổng số tiền đang đặt cọc trong mạng lưới (hàng tỷ USD).
+
+### Phí Gas (Nhiên liệu cho mạng lưới)
+
+_(Tham khảo từ Ethereum Docs)_
+
+-   Để chạy code trên "Máy tính thế giới" (EVM), bạn phải trả tiền thuê. Phí này gọi là **Gas**.
+-   **Tại sao cần Gas?** Để ngăn chặn ai đó viết một vòng lặp vô tận (infinite loop) làm treo máy tính của cả thế giới. Mỗi dòng code chạy đều tốn một ít xăng, hết xăng thì xe (chương trình) dừng lại.
 
 ### Tính nhất quán của mạng
 
@@ -166,11 +209,18 @@ Khi bạn bấm "Gửi tiền":
 ### Mô hình Account (Ethereum, Ngân hàng)
 
 -   **Cách hoạt động:** Giống hệt tài khoản ngân hàng.
+-   **Phân loại tài khoản (Ethereum Docs):**
+    -   **EOA (Externally Owned Account):** Tài khoản do người dùng kiểm soát bằng Private Key (ví dụ: ví Metamask của bạn). Có thể khởi tạo giao dịch.
+    -   **Contract Account:** Tài khoản chứa code (Smart Contract). Không có Private Key, chỉ hoạt động khi có ai đó gọi đến nó.
+-   **Cấu tạo một tài khoản:** _(Tham khảo Ethereum Docs)_
+    Mỗi tài khoản giống như một hồ sơ cá nhân gồm 4 mục:
+    1.  **Nonce:** Số đếm số lượng giao dịch đã thực hiện. Giống như số thứ tự hóa đơn, để đảm bảo giao dịch không bị lặp lại (Replay Attack).
+    2.  **Balance:** Số dư tiền (ETH).
+    3.  **Storage:** Ngăn chứa dữ liệu bền vững (chỉ dành cho Smart Contract).
+    4.  **CodeHash:** Mã lập trình (chỉ dành cho Smart Contract).
 -   **Ví dụ:** Ví A có 100 đồng.
     -   A chuyển 10 đồng cho B.
     -   Hệ thống cập nhật: Ví A còn 90, Ví B thêm 10.
--   **Ưu điểm:** Dễ hiểu, dễ lập trình Smart Contract phức tạp.
--   **Nhược điểm:** Khó xử lý song song (phải chờ giao dịch trước xong mới tính tiếp được số dư).
 
 ### Mô hình UTXO (Bitcoin, CKB)
 
@@ -180,7 +230,23 @@ Khi bạn bấm "Gửi tiền":
     -   Bạn không thể xé tờ 100k ra. Bạn phải đưa cả tờ 100k (Input).
     -   Hệ thống sẽ trả lại cho bạn một tờ 90k (Output mới) và đưa người bán tờ 10k (Output mới).
     -   Tờ 100k cũ coi như đã "tiêu" và bị hủy.
--   **Ưu điểm:** Bảo mật cao hơn, riêng tư hơn, và đặc biệt là **có thể xử lý song song** (vì các tờ tiền độc lập với nhau).
+-   **Cell Model (Nervos CKB):** _(Tham khảo Nervos KB)_
+    -   Hãy tưởng tượng UTXO của Bitcoin là cái hộp chỉ đựng được tiền.
+    -   **Cell** của Nervos là cái hộp "thần kỳ" hơn (Generalized UTXO): Nó có thể đựng tiền, đựng code, hoặc đựng dữ liệu bất kỳ.
+    -   Đây là bản nâng cấp của UTXO, giúp nó vừa bảo mật như Bitcoin, vừa thông minh như Ethereum.
+
+### So sánh chuyên sâu (Determinism & Parallelism)
+
+_(Tham khảo Nervos KB)_
+
+1.  **Tính xác định (Determinism):**
+
+    -   **UTXO:** Khi bạn tạo giao dịch, bạn chỉ định rõ "Tôi tiêu tờ tiền A". Nếu tờ tiền A chưa bị tiêu, giao dịch chắc chắn thành công. Kết quả rất rõ ràng ngay từ đầu.
+    -   **Account:** Bạn nói "Trừ 10 đồng trong ví tôi". Nhưng từ lúc bạn bấm nút đến lúc thợ đào xử lý, có thể một giao dịch khác (ví dụ trả phí định kỳ) đã trừ tiền của bạn rồi -> Giao dịch có thể thất bại bất ngờ hoặc kết quả khác dự tính.
+
+2.  **Khả năng song song (Parallelism):**
+    -   **UTXO:** Hai người A và B tiêu 2 tờ tiền khác nhau -> Máy tính xử lý cùng lúc được (Song song). Đây là lý do các blockchain UTXO mở rộng tốt hơn.
+    -   **Account:** Hai người cùng gửi tiền vào ví C -> Máy tính phải xếp hàng xử lý từng người một để cập nhật số dư ví C (Tuần tự). Nếu không sẽ bị lỗi tính toán.
 
 ### So sánh nhanh
 
